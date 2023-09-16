@@ -13,6 +13,6 @@ executed the input command `creg`.
 You are able to edit config.ini,
 To change registry-json, add the filename of where the json registry is.
 To change library-dir, state the directory where the libraries are held.
-(To go deeper into directories, use . to split directory names instead on / or \.
+(To go deeper into directories, use . to split directory names instead on / or \\.
 
 Thanks for using this program!
