@@ -10,4 +10,9 @@ Your program requires a `__command__()` function which has a string argument tha
 You will need to register your program name in the file indicated in config.ini, under registry-json, after you have started the program and
 executed the input command `creg`.
 
+You are able to edit config.ini,
+To change registry-json, add the filename of where the json registry is.
+To change library-dir, state the directory where the libraries are held.
+(To go deeper into directories, use . to split directory names instead on / or \.
+
 Thanks for using this program!
