@@ -113,6 +113,8 @@ def main():
                                 log('cmd-prm', f'temporary library {i} not found, skipping file')
                     except NameError:
                         log('cmd-prm', f'temporary libraries not imported so not removed')
+                    except TypeError:
+                        log('cmd-prm', f'temporary libraries no imported so not removed')
                 log('cmd-prm', 'Terminal Stopped')
                 log('code', 'Loop Broken')
                 break
