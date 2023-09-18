@@ -44,14 +44,14 @@ def main():
 
 
     help = '''builtin commands:
-              help                 | Shows this help menu
-              ?                    | Shows this help menu
-              extc                 | Uses an external command library
-              creg                 | (Re)Creates the external command registry
-              hist                 | Shows current session command history
-              exit                 | Exits this VEP (Virtual Environment Program)
-              stop                 | Exits this VEP (Virtual Environment Program)
-              quit                 | Exits this VEP (Virtual Environment Program)'''
+              help                              | Shows this help menu
+              ?                                 | Shows this help menu
+              extc [library_name] [external_cmd]| Uses an external command library
+              creg                              | (Re)Creates the external command registry
+              hist                              | Shows current session command history
+              exit                              | Exits this VEP (Virtual Environment Program)
+              stop                              | Exits this VEP (Virtual Environment Program)
+              quit                              | Exits this VEP (Virtual Environment Program)'''
 
     cmdHistory = []
     log('start', 'Loading libraries')
@@ -64,18 +64,25 @@ def main():
             cmd = input("% ")
             cmdHistory.append(cmd)
             log('cmd-prm', f'executed command {cmd}')
+            cmda = cmd.split()
             if cmd == 'help' or cmd == '?':
                 print(help)
-            elif cmd == 'extc':
+            elif cmda[0] == 'extc':
                 if ALLOW_EXTCMD:
                     loaded, ltr = loaders.cmd_loader.loadRegistry(RFILE, RLOCA, CLOCA)
                     if loaded == 1:
                         continue
-                    rid = input('registry id: ')
+                    try:
+                        rid = cmda[1]
+                    except IndexError:
+                        rid = input('registry id: ')
                     if rid not in loaded:
                         log('cmd_loader', 'no such registry-id')
                         continue
-                    cmmd = input(f'{rid} command: ')
+                    try:
+                        cmmd = cmda[2]
+                    except IndexError:
+                        cmmd = input(f'{rid} command: ')
                     libx = importlib.import_module(f'{RLOCA}.{rid}')
                     cmdHistory.append(f'[{rid}]: {cmmd}')
                     try:
@@ -129,6 +136,5 @@ def main():
     log('end', 'Stopped Virtual Environment Program')
     log('end', 'exit-code 0')
     return
-
 
 
